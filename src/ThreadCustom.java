@@ -12,10 +12,11 @@ public class ThreadCustom extends Thread{
         Random r = new Random();
         int tiempo = r.nextInt(7000)+1000;
         try {
-            sleep(tiempo);
-            callback.finished("El "+getName()+" ha dormido por "+tiempo+" Milisegundos");
-            tiempo = r.nextInt(6000)+2000;
-            sleep(tiempo);
+                sleep(tiempo);
+                callback.finished("El "+getName()+" ha dormido por "+tiempo+" Milisegundos");
+                callback.addStr(getName()+" ha tardado "+tiempo+"Ms");
+                tiempo = r.nextInt(6000)+2000;
+                sleep(tiempo);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
