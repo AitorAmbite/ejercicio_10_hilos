@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Principal implements Callback{
-    final int NUMTHREADS = 5;
+    final int NUMTHREADS = 100;
     int numFinalizados = 0;
 
     HashMap<Integer,ArrayList<String>> iteraciones = new HashMap<Integer,ArrayList<String>>();
@@ -33,11 +33,8 @@ public class Principal implements Callback{
 
     @Override
     public void acaba() {
-        if(getNumFinalizados() < NUMTHREADS-1){
-            // Esta condicion es en NUMTHREADS-1 porque cuando llegas a NUMTHREADS-1
-            // , uno menos que el numero de hilos el siguiente sera el final seguro
-            setNumFinalizados(getNumFinalizados()+1);
-        }else{
+        setNumFinalizados(getNumFinalizados()+1);
+        if(getNumFinalizados() >= NUMTHREADS){
             System.out.println(getNumFinalizados());
             for (Map.Entry<Integer, ArrayList<String>> ite : iteraciones.entrySet()) {
                 System.out.println("Iteracion " + ite.getKey());
