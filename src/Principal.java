@@ -3,14 +3,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Principal implements Callback{
-    final int NUMTHREADS = 5;
+    final int NUMTHREADS = 100;
     int numFinalizados = 0;
     Boolean salida=false;
 
     HashMap<Integer,ArrayList<String>> iteraciones = new HashMap<Integer,ArrayList<String>>();
 
     public Principal() {
-        for(int i=1;i<6;i++){
+        for(int i=1;i<NUMTHREADS+1;i++){
             ThreadCustom hilo = new ThreadCustom(this);
             hilo.setName("Hilo "+i);
             hilo.start();
