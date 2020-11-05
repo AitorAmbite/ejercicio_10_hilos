@@ -10,13 +10,15 @@ public class ThreadCustom extends Thread{
     @Override
     public void run() {
         Random r = new Random();
-        int tiempo = r.nextInt(7000)+1000;
+        int tiempo = 0;
         try {
+            for(int i=1;i<6;i++){
+                tiempo = r.nextInt(7000)+1000;
                 sleep(tiempo);
-                callback.finished("El "+getName()+" ha dormido por "+tiempo+" Milisegundos");
-                callback.addStr(getName()+" ha tardado "+tiempo+"Ms");
-                tiempo = r.nextInt(6000)+2000;
-                sleep(tiempo);
+                System.out.println("Espero "+getName());
+                callback.addStr("El "+getName()+" ha dormido por "+tiempo+" milisegundos" ,i);
+            }
+            callback.finished();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

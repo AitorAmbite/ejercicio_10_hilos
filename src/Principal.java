@@ -1,39 +1,37 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Principal implements Callback{
-    final int TAMTHREADS = 5;
-    ThreadCustom[] hilos = new ThreadCustom[TAMTHREADS];
-    ArrayList <String> lista = new ArrayList<String>();
+    final int NUMTHREADS = 5;
+    int numFinalizados = 0;
 
+    HashMap<Integer,ArrayList<String>> iteraciones = new HashMap<Integer,ArrayList<String>>();
     public Principal() {
-        for (int i=1;i<5;i++){
-            System.out.println("Iteracion "+i);
-            for(int j=0;j<TAMTHREADS;j++){
-                ThreadCustom hilo = new ThreadCustom(this);
-                hilo.setName("hilo "+j);
-                hilo.start();
-                hilos[j] = hilo;
-            }
-            for(ThreadCustom h:hilos){
-                try {
-                    h.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            System.out.println("\n\n El hilo que ha terminado primero es: "+lista.get(0));
-            lista.clear();
+        for(int i=1;i<6;i++){
+            ThreadCustom hilo = new ThreadCustom(this);
+            hilo.setName("Hilo "+i);
+            hilo.start();
         }
-    }
-
-    public void addStr(String hiloString){
-        lista.add(hiloString);
+        while(numFinalizados != NUMTHREADS){
+            continue;
+        }
+        System.out.println(iteraciones.values());
     }
 
     @Override
-    public void finished(String finalizacion) {
-        System.out.println(finalizacion );
+    public void addStr(String hiloString,int i){
+        //TODO
     }
 
+    public void finished() {
+        setNumFinalizados(getNumFinalizados()+1);
+    }
 
+    public int getNumFinalizados() {
+        return numFinalizados;
+    }
+
+    public void setNumFinalizados(int numFinalizados) {
+        this.numFinalizados = numFinalizados;
+    }
 }
