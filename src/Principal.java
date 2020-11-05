@@ -1,30 +1,40 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Principal implements Callback{
     final int NUMTHREADS = 5;
     int numFinalizados = 0;
+    Boolean salida=false;
 
     HashMap<Integer,ArrayList<String>> iteraciones = new HashMap<Integer,ArrayList<String>>();
+
     public Principal() {
         for(int i=1;i<6;i++){
             ThreadCustom hilo = new ThreadCustom(this);
             hilo.setName("Hilo "+i);
             hilo.start();
         }
-        while(numFinalizados != NUMTHREADS){
-            continue;
-        }
-        System.out.println(iteraciones.values());
+
     }
 
     @Override
     public void addStr(String hiloString,int i){
-        //TODO
+        ArrayList<String> aux = null;
+        if(iteraciones.containsKey(i)){
+            aux = new ArrayList<String>(iteraciones.get(i));
+            aux.add(hiloString);
+            iteraciones.put(i,aux);
+        }else{
+            aux = new ArrayList<String>();
+            aux.add(hiloString);
+            iteraciones.put(i,aux);
+        }
     }
 
-    public void finished() {
-        setNumFinalizados(getNumFinalizados()+1);
+    @Override
+    public void acaba() {
+        numFinalizados++;
     }
 
     public int getNumFinalizados() {
@@ -33,5 +43,18 @@ public class Principal implements Callback{
 
     public void setNumFinalizados(int numFinalizados) {
         this.numFinalizados = numFinalizados;
+    }
+
+
+    @Override
+    public void what() {
+        if(getNumFinalizados() >=5){
+            for (Map.Entry<Integer, ArrayList<String>> ite : iteraciones.entrySet()) {
+                System.out.println("Iteracion "+ite.getKey());
+                for (String hilo : ite.getValue()){
+                    System.out.println(hilo);
+                }
+            }
+        }
     }
 }

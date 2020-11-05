@@ -15,10 +15,10 @@ public class ThreadCustom extends Thread{
             for(int i=1;i<6;i++){
                 tiempo = r.nextInt(7000)+1000;
                 sleep(tiempo);
-                System.out.println("Espero "+getName());
                 callback.addStr("El "+getName()+" ha dormido por "+tiempo+" milisegundos" ,i);
             }
-            callback.finished();
+            callback.acaba();
+            callback.what();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
