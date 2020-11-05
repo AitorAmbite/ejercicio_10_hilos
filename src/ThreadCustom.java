@@ -18,7 +18,6 @@ public class ThreadCustom extends Thread{
                 callback.addStr("El "+getName()+" ha dormido por "+tiempo+" milisegundos" ,i);
             }
             callback.acaba();
-            callback.evalu();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
