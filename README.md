@@ -1,5 +1,5 @@
 # ejercicio_100_hilos
-_ Vamos a crear 100 hilos. Cuando se inicie, cada hilo generará número aleatorio comprendido entre entre 1000 y el 8000 y dormirá por ese periodo_
+_ Vamos a crear 100 hilos. Cuando se inicie, cada hilo generará número aleatorio comprendido entre entre 1000 y el 8000 y dormirá por ese periodo _
 _Cuando termine, notificará que ha terminado la primera escala y volverá a repetir el proceso de_
 _generar un número aleatorio y dormir por ese periodo._
 _Cuando el proceso principal haya recibido la confirmación de que todos los hijos han acabado, entonces mostrará_
