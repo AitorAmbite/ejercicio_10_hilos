@@ -5,7 +5,6 @@ import java.util.Map;
 public class Principal implements Callback{
     final int NUMTHREADS = 100;
     int numFinalizados = 0;
-    Boolean salida=false;
 
     HashMap<Integer,ArrayList<String>> iteraciones = new HashMap<Integer,ArrayList<String>>();
 
@@ -34,20 +33,11 @@ public class Principal implements Callback{
 
     @Override
     public void acaba() {
-        numFinalizados++;
+        setNumFinalizados(getNumFinalizados()+1);
     }
-
-    public int getNumFinalizados() {
-        return numFinalizados;
-    }
-
-    public void setNumFinalizados(int numFinalizados) {
-        this.numFinalizados = numFinalizados;
-    }
-
 
     @Override
-    public void what() {
+    public void evalu() {
         if(getNumFinalizados() >=5){
             for (Map.Entry<Integer, ArrayList<String>> ite : iteraciones.entrySet()) {
                 System.out.println("Iteracion "+ite.getKey());
@@ -56,5 +46,13 @@ public class Principal implements Callback{
                 }
             }
         }
+    }
+
+    public int getNumFinalizados() {
+        return numFinalizados;
+    }
+
+    public void setNumFinalizados(int numFinalizados) {
+        this.numFinalizados = numFinalizados;
     }
 }
